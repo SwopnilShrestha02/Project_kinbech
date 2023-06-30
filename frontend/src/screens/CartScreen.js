@@ -11,19 +11,15 @@ const CartScreen = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const productId=id
+  const productId=id.id
 
   const qty= location.search?Number(location.search.split('=')[1]): 1
-
 
   useEffect(()=>{
     if(productId){
       dispatch(addToCart(productId,qty))
     }
   },[dispatch,productId,qty])
-
-
-
 
   return (
     <h1>CART</h1>

@@ -23,7 +23,10 @@ const ProductScreen = ({history}) => {
           dispatch(listProductDetails(id))
     }, [dispatch,id])
     
-    const addToCartHandler=()=>{
+    const addToCartHandler= async ()=>{
+        console.log(qty);
+        console.log( typeof (qty));
+
         navigate(`/cart/${id}?qty=${qty}`)
     }
 
