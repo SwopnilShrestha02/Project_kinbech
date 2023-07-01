@@ -21,6 +21,9 @@ const CartScreen = () => {
     }
   },[dispatch,productId,qty])
 
+  const cart=useSelector(state=>state.cart)
+  const {cartItems}=cart
+
   return (
     <h1>CART</h1>
   )
