@@ -25,6 +25,10 @@ const CartScreen = () => {
     console.log('remove')
   }
 
+  const checkoutHandler=()=>{
+    navigate('/login?redirect=shipping')
+  }
+
   const cart=useSelector(state=>state.cart)
   const {cartItems}=cart
 
@@ -44,7 +48,7 @@ const CartScreen = () => {
                   </Col>
                   <Col md={2}>${item.price}</Col>
                   <Col md={2}>
-                    <Form.Control as ='select' value={qty } onChange={(e)=>addToCart(item.product,Number(e.target.value) )}>
+                    <Form.Control as ='select' value={item.qty} onChange={(e)=>addToCart(item.product,Number(e.target.value) )}>
                         {                
                          [...Array(item.countInStock).keys()].map(x=>(
                             <option key={x+1} value={x+1}>
@@ -66,11 +70,20 @@ const CartScreen = () => {
           </ListGroup>
         )}
       </Col>
-      <Col md={2}>
-
-      </Col>
-      <Col md={2}>
-
+      <Col md={4}>
+          <Card>
+            <ListGroup variant='flush'>
+              <ListGroup.Item>
+                <h2>Sub Total ({cartItems.reduce((acc,item)=>acc+item.qty, 0)}) items</h2>
+              ${cartItems.reduce((acc,item)=>acc+item.qty*item.price,0).toFixed(2)}
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <Button type='button' className='btn-block' disabled={cartItems.length===0} onClick={checkoutHandler}>
+                  Proceed To Check Out
+                </Button>
+              </ListGroup.Item>
+            </ListGroup>
+          </Card>
       </Col>
     </Row>
   )
